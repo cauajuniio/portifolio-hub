@@ -200,6 +200,8 @@ header p {
     padding: 3rem;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
@@ -463,4 +465,35 @@ a:focus-visible {
     .skills-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* =========================================
+   LINKS DE PROJETO (GITHUB)
+   ========================================= */
+.projeto-links {
+    margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+.link-projeto {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: opacity 0.2s ease;
+}
+
+.link-projeto:hover {
+    opacity: 0.7;
+}
+
+.link-projeto svg {
+    transition: transform 0.2s ease;
+}
+
+.link-projeto:hover svg {
+    transform: translate(2px, -2px);
 }

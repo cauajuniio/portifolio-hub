@@ -2,15 +2,15 @@
    RESET & VARIÁVEIS
    ========================================= */
 :root {
-    --bg-deep: #0e0a1f;
-    --purple-1: #3b1d70;
-    --purple-2: #6d28d9;
-    --purple-3: #a855f7;
-    --pink-accent: #e879f9;
-    --text-light: #f3f0ff;
-    --text-muted: #b8aed4;
-    --card-bg: rgba(255, 255, 255, 0.04);
-    --card-border: rgba(255, 255, 255, 0.08);
+    --bg-deep: #4c1d95;
+    --purple-1: #5b21b6;
+    --purple-2: #7c3aed;
+    --purple-3: #a78bfa;
+    --pink-accent: #e9d5ff;
+    --text-light: #ffffff;
+    --text-muted: #ddd6fe;
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.15);
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
 }
@@ -45,14 +45,14 @@ body {
     height: 140%;
     z-index: -3;
     background:
-        radial-gradient(circle at 20% 20%, var(--purple-3) 0%, transparent 40%),
-        radial-gradient(circle at 80% 30%, var(--pink-accent) 0%, transparent 35%),
-        radial-gradient(circle at 50% 80%, var(--purple-2) 0%, transparent 45%),
-        linear-gradient(135deg, var(--bg-deep) 0%, var(--purple-1) 50%, var(--bg-deep) 100%);
+        radial-gradient(circle at 20% 20%, var(--purple-3) 0%, transparent 45%),
+        radial-gradient(circle at 80% 30%, var(--pink-accent) 0%, transparent 40%),
+        radial-gradient(circle at 50% 80%, var(--purple-2) 0%, transparent 50%),
+        linear-gradient(135deg, var(--purple-1) 0%, var(--bg-deep) 50%, var(--purple-2) 100%);
     background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
     animation: auroraMove 25s ease-in-out infinite alternate;
     filter: blur(60px);
-    opacity: 0.7;
+    opacity: 0.9;
     will-change: transform, background-position;
     transition: transform 0.1s linear;
 }
@@ -90,17 +90,7 @@ body {
 /* =========================================
    RUÍDO / TEXTURA SUTIL
    ========================================= */
-.bg-noise {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    pointer-events: none;
-}
+/* (camada de ruído removida para manter o fundo limpo) */
 
 /* =========================================
    HEADER
@@ -137,10 +127,8 @@ header h1 {
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.02em;
-    background: linear-gradient(135deg, #ffffff 20%, var(--purple-3) 60%, var(--pink-accent) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    color: var(--text-light);
+    text-shadow: 0 4px 30px rgba(76, 29, 149, 0.6);
     margin-bottom: 1rem;
 }
 
@@ -331,29 +319,52 @@ header p {
     font-size: 1rem;
 }
 
-.btn-linkedin {
+.redes-sociais {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-rede {
     display: inline-flex;
     align-items: center;
     gap: 0.7rem;
-    background: linear-gradient(135deg, var(--purple-2), var(--purple-3));
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--card-border);
     color: #fff;
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
     padding: 0.9rem 2rem;
     border-radius: 100px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
-.btn-linkedin:hover {
+.btn-rede:hover {
     transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 10px 30px -8px rgba(168, 85, 247, 0.6);
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 10px 30px -8px rgba(255, 255, 255, 0.3);
 }
 
-.icon-linkedin {
+.btn-rede img {
     width: 22px;
     height: 22px;
-    filter: brightness(0) invert(1);
+}
+
+.btn-linkedin {
+    background: linear-gradient(135deg, #0a66c2, #378fe9);
+    border-color: transparent;
+}
+
+.btn-instagram {
+    background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+    border-color: transparent;
+}
+
+.btn-whatsapp {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    border-color: transparent;
 }
 
 /* =========================================

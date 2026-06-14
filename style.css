@@ -2,15 +2,13 @@
    RESET & VARIÁVEIS
    ========================================= */
 :root {
-    --bg-deep: #4c1d95;
-    --purple-1: #5b21b6;
-    --purple-2: #7c3aed;
-    --purple-3: #a78bfa;
-    --pink-accent: #e9d5ff;
-    --text-light: #ffffff;
-    --text-muted: #ddd6fe;
-    --card-bg: rgba(255, 255, 255, 0.08);
-    --card-border: rgba(255, 255, 255, 0.15);
+    --bg: #000000;
+    --bg-elevated: #0a0a0a;
+    --text-primary: #f5f5f7;
+    --text-secondary: #86868b;
+    --line: rgba(255, 255, 255, 0.08);
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.08);
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
 }
@@ -27,75 +25,35 @@ html {
 
 body {
     font-family: var(--font-body);
-    color: var(--text-light);
-    background-color: var(--bg-deep);
+    color: var(--text-primary);
+    background-color: var(--bg);
     overflow-x: hidden;
     min-height: 100vh;
-    position: relative;
+    line-height: 1.6;
 }
 
 /* =========================================
-   FUNDO ANIMADO — AURORA ROXA
-   ========================================= */
-.bg-aurora {
-    position: fixed;
-    top: -50%;
-    left: -20%;
-    width: 140%;
-    height: 220%;
-    z-index: -3;
-    background:
-        radial-gradient(circle at 20% 20%, var(--purple-3) 0%, transparent 45%),
-        radial-gradient(circle at 80% 30%, var(--pink-accent) 0%, transparent 40%),
-        radial-gradient(circle at 50% 80%, var(--purple-2) 0%, transparent 50%),
-        linear-gradient(135deg, var(--purple-1) 0%, var(--bg-deep) 50%, var(--purple-2) 100%);
-    background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
-    animation: auroraMove 25s ease-in-out infinite alternate;
-    filter: blur(60px);
-    opacity: 0.9;
-    will-change: transform, background-position;
-    transition: transform 0.1s linear;
-}
-
-@keyframes auroraMove {
-    0% {
-        background-position: 0% 0%, 100% 0%, 50% 100%, 0% 0%;
-    }
-    50% {
-        background-position: 50% 50%, 50% 50%, 30% 70%, 0% 0%;
-    }
-    100% {
-        background-position: 100% 100%, 0% 100%, 70% 30%, 0% 0%;
-    }
-}
-
-/* =========================================
-   GRID SUTIL DE FUNDO
+   GRID DE FUNDO SUTIL
    ========================================= */
 .bg-grid {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 200%;
-    z-index: -2;
+    height: 100%;
+    z-index: -1;
     background-image:
         linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 48px 48px;
-    transition: transform 0.1s linear;
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 0%, transparent 70%);
 }
-
-/* =========================================
-   RUÍDO / TEXTURA SUTIL
-   ========================================= */
-/* (camada de ruído removida para manter o fundo limpo) */
 
 /* =========================================
    HEADER
    ========================================= */
 header {
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -106,42 +64,41 @@ header {
 }
 
 .header-content {
-    animation: fadeUp 1s ease-out;
+    animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .eyebrow {
     display: inline-block;
-    font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: var(--purple-3);
-    margin-bottom: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
 }
 
 header h1 {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 9vw, 6.5rem);
+    font-size: clamp(3.5rem, 11vw, 8rem);
     font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.02em;
-    color: var(--text-light);
-    text-shadow: 0 4px 30px rgba(76, 29, 149, 0.6);
-    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
 }
 
 header p {
-    font-size: clamp(1rem, 2vw, 1.25rem);
-    color: var(--text-muted);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--text-secondary);
     font-weight: 400;
-    letter-spacing: 0.01em;
+    max-width: 38ch;
+    margin: 0 auto;
 }
 
 @keyframes fadeUp {
     from {
         opacity: 0;
-        transform: translateY(24px);
+        transform: translateY(28px);
     }
     to {
         opacity: 1;
@@ -152,31 +109,31 @@ header p {
 /* Indicador de scroll */
 .scroll-hint {
     position: absolute;
-    bottom: 2.5rem;
+    bottom: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.7rem;
 }
 
 .scroll-hint span {
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    opacity: 0.7;
+    color: var(--text-secondary);
+    opacity: 0.6;
 }
 
 .scroll-line {
     width: 1px;
-    height: 48px;
-    background: linear-gradient(to bottom, var(--purple-3), transparent);
-    animation: scrollPulse 2s ease-in-out infinite;
+    height: 52px;
+    background: linear-gradient(to bottom, var(--text-secondary), transparent);
+    animation: scrollPulse 2.4s ease-in-out infinite;
 }
 
 @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
-    50% { opacity: 1; transform: scaleY(1); }
+    0%, 100% { opacity: 0.2; transform: scaleY(0.5); }
+    50% { opacity: 0.8; transform: scaleY(1); }
 }
 
 /* =========================================
@@ -185,22 +142,22 @@ header p {
 .container {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 2rem 4rem;
+    padding: 0 2rem 6rem;
     position: relative;
 }
 
 .secao {
-    margin-bottom: 6rem;
+    margin-bottom: 10rem;
 }
 
 .secao-titulo {
     display: flex;
-    align-items: baseline;
-    gap: 1.2rem;
-    margin-bottom: 2.5rem;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    transform: translateY(32px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .secao-titulo.visivel {
@@ -209,22 +166,18 @@ header p {
 }
 
 .secao-numero {
-    font-family: var(--font-display);
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 600;
-    color: var(--purple-3);
-    letter-spacing: 0.1em;
-    border: 1px solid var(--card-border);
-    border-radius: 100px;
-    padding: 0.3rem 0.9rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
 }
 
-.secao-titulo h2,
-.secao-linkedin h2 {
+.secao-titulo h2 {
     font-family: var(--font-display);
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-size: clamp(2rem, 5vw, 3.2rem);
     font-weight: 600;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
 }
 
 /* =========================================
@@ -236,18 +189,23 @@ header p {
     gap: 1.5rem;
 }
 
+.projetos-grid--single {
+    grid-template-columns: 1fr;
+}
+
 .card-projeto {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 2rem;
-    backdrop-filter: blur(12px);
-    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    border-radius: 20px;
+    padding: 3rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     opacity: 0;
     transform: translateY(40px);
-    transition-property: opacity, transform, border-color, box-shadow;
-    transition-duration: 0.7s, 0.7s, 0.4s, 0.4s;
-    transition-timing-function: ease-out;
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.4s ease,
+                background 0.4s ease;
 }
 
 .card-projeto.visivel {
@@ -256,50 +214,112 @@ header p {
 }
 
 .card-projeto:hover {
-    transform: translateY(-6px);
-    border-color: var(--purple-3);
-    box-shadow: 0 12px 40px -10px rgba(168, 85, 247, 0.4);
+    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .card-tag {
     display: inline-block;
     font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--pink-accent);
-    background: rgba(232, 121, 249, 0.1);
+    color: var(--text-secondary);
+    border: 1px solid var(--line);
     border-radius: 100px;
-    padding: 0.35rem 0.8rem;
-    margin-bottom: 1rem;
+    padding: 0.35rem 0.9rem;
 }
 
 .card-projeto h3 {
     font-family: var(--font-display);
-    font-size: 1.25rem;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
     font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: var(--text-light);
+    margin-bottom: 1rem;
+    color: var(--text-primary);
 }
 
 .card-projeto p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 70ch;
 }
 
 /* =========================================
-   SEÇÃO LINKEDIN
+   SKILLS GRID
+   ========================================= */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.skill-bloco {
+    background: var(--bg-elevated);
+    padding: 2.5rem 2rem;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.4s ease;
+}
+
+.skill-bloco.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.skill-bloco:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.skill-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    margin-bottom: 1.2rem;
+}
+
+.skill-bloco h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: var(--text-primary);
+}
+
+.skill-bloco p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* =========================================
+   SEÇÃO DE CONEXÃO
    ========================================= */
 .secao-linkedin {
     text-align: center;
-    padding: 4rem 2rem;
-    border-radius: 24px;
-    background: linear-gradient(135deg, rgba(109, 40, 217, 0.15), rgba(232, 121, 249, 0.08));
+    padding: 6rem 2rem;
+    border-radius: 28px;
+    background: var(--bg-elevated);
     border: 1px solid var(--card-border);
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .secao-linkedin.visivel {
@@ -307,43 +327,48 @@ header p {
     transform: translateY(0);
 }
 
-.secao-linkedin .secao-numero {
-    display: inline-block;
-    margin-bottom: 1.2rem;
+.secao-linkedin h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
 }
 
 .linkedin-texto {
-    color: var(--text-muted);
-    margin: 0.75rem 0 2rem;
-    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0 auto 2.5rem;
+    font-size: 1.05rem;
+    max-width: 40ch;
 }
 
 .redes-sociais {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.65rem;
-    margin-top: 1.8rem;
+    gap: 0.8rem;
     width: 100%;
 }
 
 .link-rede {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.7rem;
-    width: 220px;
+    width: 280px;
     max-width: 90vw;
-    padding: 0.7rem 1.2rem;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--card-border);
-    color: var(--text-light);
+    padding: 0.9rem 1.4rem;
+    border-radius: 100px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text-primary);
     text-decoration: none;
-    font-family: var(--font-body);
     font-size: 0.95rem;
     font-weight: 500;
-    backdrop-filter: blur(8px);
-    transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease;
 }
 
 .link-rede .icone-svg {
@@ -353,16 +378,24 @@ header p {
     display: block;
 }
 
-.link-rede span {
-    flex: 1;
-    text-align: left;
-}
-
 .link-rede:hover {
     transform: translateY(-2px);
-    background: #ffffff;
-    color: var(--purple-1);
-    border-color: #ffffff;
+    background: var(--text-primary);
+    color: #000000;
+    border-color: var(--text-primary);
+}
+
+.link-rede--principal {
+    background: var(--text-primary);
+    color: #000000;
+    border-color: var(--text-primary);
+    font-weight: 600;
+}
+
+.link-rede--principal:hover {
+    background: var(--text-secondary);
+    border-color: var(--text-secondary);
+    color: #000000;
 }
 
 /* =========================================
@@ -370,17 +403,17 @@ header p {
    ========================================= */
 footer {
     text-align: center;
-    padding: 2.5rem 1rem;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    border-top: 1px solid var(--card-border);
+    padding: 3rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--line);
+    letter-spacing: 0.05em;
 }
 
 /* =========================================
    ACESSIBILIDADE — MOVIMENTO REDUZIDO
    ========================================= */
 @media (prefers-reduced-motion: reduce) {
-    .bg-aurora,
     .scroll-line,
     html {
         animation: none;
@@ -389,7 +422,8 @@ footer {
     .card-projeto,
     .secao-titulo,
     .secao-linkedin,
-    .header-content {
+    .header-content,
+    .skill-bloco {
         opacity: 1;
         transform: none;
         animation: none;
@@ -397,20 +431,36 @@ footer {
 }
 
 /* =========================================
+   FOCO VISÍVEL
+   ========================================= */
+a:focus-visible {
+    outline: 1px solid var(--text-primary);
+    outline-offset: 4px;
+}
+
+/* =========================================
    RESPONSIVO
    ========================================= */
+@media (max-width: 900px) {
+    .secao {
+        margin-bottom: 7rem;
+    }
+}
+
 @media (max-width: 600px) {
-    .secao-titulo {
-        flex-direction: column;
-        gap: 0.6rem;
-        align-items: flex-start;
+    .secao {
+        margin-bottom: 5rem;
     }
 
-    .secao {
-        margin-bottom: 4rem;
+    .card-projeto {
+        padding: 2rem;
     }
 
     .secao-linkedin {
-        padding: 3rem 1.5rem;
+        padding: 3.5rem 1.5rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
     }
 }

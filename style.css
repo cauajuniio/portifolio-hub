@@ -1,161 +1,407 @@
-/* Configurações básicas e zeragem de espaços */
+/* =========================================
+   RESET & VARIÁVEIS
+   ========================================= */
+:root {
+    --bg-deep: #0e0a1f;
+    --purple-1: #3b1d70;
+    --purple-2: #6d28d9;
+    --purple-3: #a855f7;
+    --pink-accent: #e879f9;
+    --text-light: #f3f0ff;
+    --text-muted: #b8aed4;
+    --card-bg: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f8fafc; /* Fundo cinza bem clarinho moderno */
-    color: #1e293b;
+    font-family: var(--font-body);
+    color: var(--text-light);
+    background-color: var(--bg-deep);
+    overflow-x: hidden;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Cabeçalho com Degradê (Azul escuro para Roxo) e sombra de relevo */
-header {
-    background: linear-gradient(135deg, #1e3a8a 0%, #6d28d9 100%);
-    color: white;
-    text-align: center;
-    padding: 70px 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-}
-
-header h1 {
-    font-size: 2.6rem;
-    font-weight: 800;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Dá relevo na letra */
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
-/* Espaçamento do conteúdo */
-.container {
-    max-width: 950px;
-    width: 100%;
-    margin: 40px auto;
-    padding: 0 20px;
-    flex: 1;
-}
-
-.secao {
-    margin-bottom: 50px;
-}
-
-/* Estilo dos títulos com linha decorativa moderna */
-h2 {
-    font-size: 1.5rem;
-    color: #0f172a;
-    margin-bottom: 25px;
-    padding-bottom: 8px;
-    border-bottom: 3px solid #e2e8f0;
     position: relative;
 }
 
-h2::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 70px;
-    height: 3px;
-    background-color: #3b82f6; /* Detalhe azul */
+/* =========================================
+   FUNDO ANIMADO — AURORA ROXA
+   ========================================= */
+.bg-aurora {
+    position: fixed;
+    top: -20%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    z-index: -3;
+    background:
+        radial-gradient(circle at 20% 20%, var(--purple-3) 0%, transparent 40%),
+        radial-gradient(circle at 80% 30%, var(--pink-accent) 0%, transparent 35%),
+        radial-gradient(circle at 50% 80%, var(--purple-2) 0%, transparent 45%),
+        linear-gradient(135deg, var(--bg-deep) 0%, var(--purple-1) 50%, var(--bg-deep) 100%);
+    background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+    animation: auroraMove 25s ease-in-out infinite alternate;
+    filter: blur(60px);
+    opacity: 0.7;
+    will-change: transform, background-position;
+    transition: transform 0.1s linear;
 }
 
-/* Alinhamento dos cards lado a lado */
+@keyframes auroraMove {
+    0% {
+        background-position: 0% 0%, 100% 0%, 50% 100%, 0% 0%;
+    }
+    50% {
+        background-position: 50% 50%, 50% 50%, 30% 70%, 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%, 0% 100%, 70% 30%, 0% 0%;
+    }
+}
+
+/* =========================================
+   GRID SUTIL DE FUNDO
+   ========================================= */
+.bg-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    z-index: -2;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 100%);
+    transition: transform 0.1s linear;
+}
+
+/* =========================================
+   RUÍDO / TEXTURA SUTIL
+   ========================================= */
+.bg-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+/* =========================================
+   HEADER
+   ========================================= */
+header {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+}
+
+.header-content {
+    animation: fadeUp 1s ease-out;
+}
+
+.eyebrow {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--purple-3);
+    margin-bottom: 1.2rem;
+}
+
+header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 9vw, 6.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #ffffff 20%, var(--purple-3) 60%, var(--pink-accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+}
+
+header p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Indicador de scroll */
+.scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.scroll-hint span {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--purple-3), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* =========================================
+   CONTAINER & SEÇÕES
+   ========================================= */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+    position: relative;
+}
+
+.secao {
+    margin-bottom: 6rem;
+}
+
+.secao-titulo {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.secao-titulo.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.secao-numero {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--purple-3);
+    letter-spacing: 0.1em;
+    border: 1px solid var(--card-border);
+    border-radius: 100px;
+    padding: 0.3rem 0.9rem;
+}
+
+.secao-titulo h2,
+.secao-linkedin h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+/* =========================================
+   GRID DE PROJETOS
+   ========================================= */
 .projetos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 1.5rem;
 }
 
-/* CARDS COM SOMBRA E EFEITO DE RELEVO (FLUTUANTE) */
 .card-projeto {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    /* Sombra suave que faz o card parecer saltado para fora da tela (relevo) */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid #f1f5f9;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito suave mexer */
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 2rem;
+    backdrop-filter: blur(12px);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    opacity: 0;
+    transform: translateY(40px);
+    transition-property: opacity, transform, border-color, box-shadow;
+    transition-duration: 0.7s, 0.7s, 0.4s, 0.4s;
+    transition-timing-function: ease-out;
 }
 
-/* Cores de destaque diferentes para Acadêmico vs Pessoal */
-.card-projeto.academico {
-    border-top: 5px solid #3b82f6; /* Borda azul no topo */
+.card-projeto.visivel {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.card-projeto.pessoal {
-    border-top: 5px solid #ec4899; /* Borda rosa no topo */
-}
-
-/* Quando você passa o mouse, o card sobe e a sombra aumenta (Mais relevo!) */
 .card-projeto:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-6px);
+    border-color: var(--purple-3);
+    box-shadow: 0 12px 40px -10px rgba(168, 85, 247, 0.4);
+}
+
+.card-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--pink-accent);
+    background: rgba(232, 121, 249, 0.1);
+    border-radius: 100px;
+    padding: 0.35rem 0.8rem;
+    margin-bottom: 1rem;
 }
 
 .card-projeto h3 {
-    font-size: 1.2rem;
-    color: #1e293b;
-    margin-bottom: 12px;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-light);
 }
 
 .card-projeto p {
-    color: #64748b;
     font-size: 0.95rem;
     line-height: 1.6;
+    color: var(--text-muted);
 }
 
-/* Seção do LinkedIn */
+/* =========================================
+   SEÇÃO LINKEDIN
+   ========================================= */
 .secao-linkedin {
     text-align: center;
-    background: white;
-    padding: 35px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-    border: 1px solid #e2e8f0;
+    padding: 4rem 2rem;
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(109, 40, 217, 0.15), rgba(232, 121, 249, 0.08));
+    border: 1px solid var(--card-border);
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
-/* Botão do LinkedIn com degradê azul e sombra marcante */
+.secao-linkedin.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.secao-linkedin .secao-numero {
+    display: inline-block;
+    margin-bottom: 1.2rem;
+}
+
+.linkedin-texto {
+    color: var(--text-muted);
+    margin: 0.75rem 0 2rem;
+    font-size: 1rem;
+}
+
 .btn-linkedin {
     display: inline-flex;
     align-items: center;
-    background: linear-gradient(135deg, #0077b5 0%, #005582 100%);
-    color: white;
+    gap: 0.7rem;
+    background: linear-gradient(135deg, var(--purple-2), var(--purple-3));
+    color: #fff;
     text-decoration: none;
-    padding: 12px 25px;
-    font-weight: bold;
-    border-radius: 30px;
-    margin-top: 15px;
-    box-shadow: 0 4px 15px rgba(0, 119, 181, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-linkedin:hover {
-    transform: scale(1.04);
-    box-shadow: 0 6px 20px rgba(0, 119, 181, 0.6);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 30px -8px rgba(168, 85, 247, 0.6);
 }
 
 .icon-linkedin {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    filter: brightness(0) invert(1); /* Deixa o ícone branco */
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1);
 }
 
-/* Rodapé */
+/* =========================================
+   FOOTER
+   ========================================= */
 footer {
-    background-color: #0f172a;
-    color: #94a3b8;
     text-align: center;
-    padding: 20px;
-    margin-top: auto;
-    font-size: 0.9rem;
+    padding: 2.5rem 1rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--card-border);
+}
+
+/* =========================================
+   ACESSIBILIDADE — MOVIMENTO REDUZIDO
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+    .bg-aurora,
+    .scroll-line,
+    html {
+        animation: none;
+        scroll-behavior: auto;
+    }
+    .card-projeto,
+    .secao-titulo,
+    .secao-linkedin,
+    .header-content {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+}
+
+/* =========================================
+   RESPONSIVO
+   ========================================= */
+@media (max-width: 600px) {
+    .secao-titulo {
+        flex-direction: column;
+        gap: 0.6rem;
+        align-items: flex-start;
+    }
+
+    .secao {
+        margin-bottom: 4rem;
+    }
+
+    .secao-linkedin {
+        padding: 3rem 1.5rem;
+    }
 }

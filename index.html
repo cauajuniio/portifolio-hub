@@ -4,64 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Portfolio HUB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Camadas de fundo animado -->
+    <div class="bg-aurora"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-noise"></div>
 
     <header>
-        <h1>Bem-vindo ao meu Portfolio HUB</h1>
-        <p>Projetos desenvolvidos por Cauã Júnior</p>
+        <div class="header-content">
+            <span class="eyebrow">Portfolio</span>
+            <h1>Cauã Júnior</h1>
+            <p>Projetos de desenvolvimento, dados e design de interfaces</p>
+        </div>
+        <div class="scroll-hint">
+            <span>role para explorar</span>
+            <div class="scroll-line"></div>
+        </div>
     </header>
 
     <main class="container">
-        
+
         <section class="secao">
-            <h2>Esses são meus projetos acadêmicos</h2>
+            <div class="secao-titulo">
+                <span class="secao-numero">01</span>
+                <h2>Projetos acadêmicos</h2>
+            </div>
             <div class="projetos-grid">
-                
+
                 <div class="card-projeto academico">
+                    <div class="card-tag">Java · POO</div>
                     <h3>Sistema de Controle de Estoque</h3>
                     <p>Desenvolvido em Java para a disciplina de Programação Orientada a Objetos. O projeto aplica conceitos de encapsulamento, herança, polimorfismo e persistência de dados.</p>
                 </div>
-
                 <div class="card-projeto academico">
+                    <div class="card-tag">Python · Dados</div>
                     <h3>Análise de Dados Educacionais</h3>
                     <p>Projeto acadêmico de introdução à Ciência de Dados utilizando Python. Foram usadas as bibliotecas Pandas e Matplotlib para analisar o índice de aprovação de estudantes.</p>
                 </div>
-
             </div>
         </section>
 
         <section class="secao">
-            <h2>Esses são meus projetos pessoais</h2>
+            <div class="secao-titulo">
+                <span class="secao-numero">02</span>
+                <h2>Projetos pessoais</h2>
+            </div>
             <div class="projetos-grid">
-                
+
                 <div class="card-projeto pessoal">
+                    <div class="card-tag">HTML · CSS · JS</div>
                     <h3>Calculadora de Finanças Mensais</h3>
                     <p>Uma aplicação web simples feita com HTML, CSS e JavaScript vanilla para ajudar no controle de gastos diários, com armazenamento de dados direto no navegador.</p>
                 </div>
-
                 <div class="card-projeto pessoal">
+                    <div class="card-tag">CSS Grid · UI</div>
                     <h3>Landing Page Responsiva</h3>
                     <p>Criação de uma página de captura moderna para um evento ficcional de tecnologia, focada em design limpo, responsividade e técnicas avançadas de CSS Grid.</p>
                 </div>
-
             </div>
         </section>
 
         <section class="secao-linkedin">
-            <h2>Esse é o link do meu LinkedIn</h2>
+            <span class="secao-numero">03</span>
+            <h2>Vamos nos conectar</h2>
+            <p class="linkedin-texto">Acompanhe meus projetos e trajetória profissional</p>
             <a href="https://www.linkedin.com/in/cau%C3%A3-junio-campos-00658b3a5?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" class="btn-linkedin">
-                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="icon-linkedin">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="" class="icon-linkedin">
                 Acessar meu LinkedIn
             </a>
         </section>
-
     </main>
 
     <footer>
-        <p>&copy; 2026 - Desenvolvido com carinho por Cauã Júnior</p>
+        <p>&copy; 2026 — Desenvolvido com carinho por Cauã Júnior</p>
     </footer>
 
+    <script>
+        // Paralaxe sutil no fundo conforme o scroll
+        const aurora = document.querySelector('.bg-aurora');
+        const grid = document.querySelector('.bg-grid');
+
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            aurora.style.transform = `translate3d(0, ${y * 0.25}px, 0) rotate(${y * 0.02}deg)`;
+            grid.style.transform = `translate3d(0, ${y * 0.1}px, 0)`;
+        }, { passive: true });
+
+        // Revelar cards conforme entram na tela
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visivel');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.card-projeto, .secao-titulo, .secao-linkedin').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
